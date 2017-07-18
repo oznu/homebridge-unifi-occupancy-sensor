@@ -1,0 +1,17 @@
+{
+  "name": "homebridge-unifi-occupancy-sensor",
+  "version": "0.0.1",
+  "description": "An occupancy sensor for Homebridge and UniFi",
+  "main": "index.js",
+  "dependencies": {
+    "unifi-events": "0.1.4"
+  },
+  "keywords": [
+    "homebridge-plugin"
+  ],
+  "engines": {
+    "homebridge": ">=0.2.5"
+  },
+  "author": "oznu <dev@oz.nu>",
+  "license": "MIT"
+}
