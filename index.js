@@ -46,6 +46,7 @@ class OccupancySensor {
 
     this.occupancyDetected = Characteristic.OccupancyDetected.OCCUPANCY_NOT_DETECTED
     this.checkOccupancy()
+    setInterval(this.checkOccupancy, 1800)
   }
 
   checkGuest (isGuest) {
@@ -82,10 +83,7 @@ class OccupancySensor {
   }
 
   getOccupancyDetected (callback) {
-    return this.checkOccupancy()
-      .then(() => {
-        return callback(null, this.occupancyDetected)
-      })
+    return callback(null, this.occupancyDetected)
   }
 
   setOccupancyDetected (value) {
