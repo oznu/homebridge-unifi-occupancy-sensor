@@ -46,7 +46,7 @@ class OccupancySensor {
 
     this.occupancyDetected = Characteristic.OccupancyDetected.OCCUPANCY_NOT_DETECTED
     this.checkOccupancy()
-    setInterval(this.checkOccupancy, 1800)
+    setInterval(this.checkOccupancy.bind(this), 1800)
   }
 
   checkGuest (isGuest) {
