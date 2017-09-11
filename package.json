@@ -1,6 +1,6 @@
 {
   "name": "homebridge-unifi-occupancy-sensor",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "An occupancy sensor for Homebridge and UniFi",
   "main": "index.js",
   "dependencies": {
