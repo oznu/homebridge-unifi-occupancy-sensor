@@ -80,6 +80,9 @@ class OccupancySensor {
           this.setOccupancyDetected(this.occupancyDetected)
         }
       })
+      .catch((err) => {
+        this.log(`ERROR: Failed to check occupancy: ${err.message}`)
+      })
   }
 
   getOccupancyDetected (callback) {
