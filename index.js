@@ -33,13 +33,13 @@ class OccupancySensor {
     })
 
     this.unifi.on('connected', (data) => {
-      if (this.watch.includes(data.user)) {
+      if (this.watch.includes(data.user || data.guest)) {
         return this.checkOccupancy()
       }
     })
 
     this.unifi.on('disconnected', (data) => {
-      if (this.watch.includes(data.user)) {
+      if (this.watch.includes(data.user || data.guest)) {
         return this.checkOccupancy()
       }
     })
