@@ -4,6 +4,7 @@
   "description": "An occupancy sensor for Homebridge and UniFi",
   "main": "index.js",
   "dependencies": {
+    "debug": "^3.1.0",
     "unifi-events": "^0.2.0"
   },
   "keywords": [
