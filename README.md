@@ -28,3 +28,13 @@ The plugin connects to the UniFi Controller event web socket to get instant noti
   }
 ]
 ```
+
+### Site Name
+
+If you're using a non-default site you will need to specify the name of the site in the plugin config. The internal site name might not match the name you have allocated to the site exactly, you can get the required site name by navigating to the site in the unifi controller then looking at the url bar:
+
+```
+https://unifi.com:8443/manage/site/mofkpypu/dashboard
+```
+
+In this case the site name is `mofkpypu` and this is the value that should be entered in your Homebridge config.

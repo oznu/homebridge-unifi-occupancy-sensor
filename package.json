@@ -14,5 +14,9 @@
     "homebridge": ">=0.2.5"
   },
   "author": "oznu <dev@oz.nu>",
-  "license": "MIT"
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/oznu/homebridge-unifi-occupancy-sensor.git"
+  }
 }
