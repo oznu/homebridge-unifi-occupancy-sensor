@@ -1,0 +1,59 @@
+{
+  "pluginAlias": "UniFi Occupancy Sensor",
+  "pluginType": "accessory",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "name": {
+        "title": "Name",
+        "type": "string",
+        "default": "Occupancy Sensor",
+        "minLength": 1
+      },
+      "unifi": {
+        "title": "UniFi Controller Settings",
+        "type": "object",
+        "properties": {
+          "controller": {
+            "title": "Controller URL",
+            "type": "string",
+            "required": true
+          },
+          "username": {
+            "title": "Username",
+            "type": "string",
+            "required": true
+          },
+          "password": {
+            "title": "Password",
+            "type": "string",
+            "required": true
+          },
+          "site": {
+            "title": "Site",
+            "type": "string",
+            "default": "default",
+            "required": true
+          },
+          "secure": {
+            "title": "Validate the Controller SSL Certificate?",
+            "type": "boolean"
+          }
+        }
+      },
+      "watch": {
+        "title": "Watched Devices",
+        "type": "array",
+        "items": {
+          "title": "MAC Address",
+          "type": "string",
+          "pattern": "^([a-f0-9]{2}:){5}[a-f0-9]{2}$"
+        }
+      },
+      "watchGuests": {
+        "title": "Watch Guest Networks?",
+        "type": "boolean"
+      }
+    }
+  }
+}
