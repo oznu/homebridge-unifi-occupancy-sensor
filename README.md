@@ -25,6 +25,7 @@ The plugin connects to the UniFi Controller event web socket to get instant noti
     },
     "watch": ["44:00:10:f0:3e:66"]                 // Required. An array of device MAC addresses to watch for.
     "watchGuests": true                            // Optional. Set false to not monitor guest networks.
+    "mode": "any"                                  // Optional. Set to "any", "all" or "none".
   }
 ]
 ```

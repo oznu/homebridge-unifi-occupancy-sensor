@@ -19,6 +19,7 @@ class OccupancySensor {
     this.occupancyService = new Service.OccupancySensor(this.name)
     this.watch = config.watch || []
     this.watchGuests = config.watchGuests
+    this.mode = config.mode || 'any'
 
     this.unifi = new UnifiEvents({
       controller: config.unifi.controller,
@@ -80,15 +81,33 @@ class OccupancySensor {
 
         debug(`Monitored devices found:`, activeDevices.map(x => x.mac))
 
-        if (activeDevices.length > 0) {
-          this.log(`${activeDevices.length} monitored device(s) found`)
-          this.occupancyDetected = Characteristic.OccupancyDetected.OCCUPANCY_DETECTED
-          this.setOccupancyDetected(this.occupancyDetected)
+        if (this.mode === 'none') {
+          if (activeDevices.length > 0) {
+            this.log(`${activeDevices.length} monitored device(s) found. Accessory is in mode "none" so NOT triggering occupancy.`)
+            this.occupancyDetected = Characteristic.OccupancyDetected.OCCUPANCY_NOT_DETECTED
+          } else {
+            this.log(`${activeDevices.length} monitored device(s) found. Accessory is in mode "none" so triggering occupancy."`)
+            this.occupancyDetected = Characteristic.OccupancyDetected.OCCUPANCY_DETECTED
+          }
+        } else if (this.mode === 'all') {
+          if (activeDevices.length === this.watch.length) {
+            this.log(`${activeDevices.length} monitored device(s) found. Accessory is in mode "all" and all watched devices are connected so triggering occupancy.`)
+            this.occupancyDetected = Characteristic.OccupancyDetected.OCCUPANCY_DETECTED
+          } else {
+            this.log(`${activeDevices.length} monitored device(s) found. Accessory is in mode "all" and not all watched devices are connected so NOT triggering occupancy.`)
+            this.occupancyDetected = Characteristic.OccupancyDetected.OCCUPANCY_NOT_DETECTED
+          }
         } else {
-          this.log(`Zero monitored devices found.`)
-          this.occupancyDetected = Characteristic.OccupancyDetected.OCCUPANCY_NOT_DETECTED
-          this.setOccupancyDetected(this.occupancyDetected)
+          if (activeDevices.length > 0) {
+            this.log(`${activeDevices.length} monitored device(s) found. Accessory is in mode "any" so triggering occupancy.`)
+            this.occupancyDetected = Characteristic.OccupancyDetected.OCCUPANCY_DETECTED
+          } else {
+            this.log(`${activeDevices.length} monitored device(s) found. Accessory is in mode "any" so NOT triggering occupancy."`)
+            this.occupancyDetected = Characteristic.OccupancyDetected.OCCUPANCY_NOT_DETECTED
+          }
         }
+
+        this.setOccupancyDetected(this.occupancyDetected)
       })
       .catch((err) => {
         this.log(`ERROR: Failed to check occupancy: ${err.message}`)
@@ -115,5 +134,4 @@ class OccupancySensor {
 
     return [informationService, this.occupancyService]
   }
-
 }
