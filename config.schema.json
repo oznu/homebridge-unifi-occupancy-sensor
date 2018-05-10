@@ -50,6 +50,17 @@
           "pattern": "^([a-f0-9]{2}:){5}[a-f0-9]{2}$"
         }
       },
+      "mode": {
+        "title": "Watch Mode",
+        "type": "string",
+        "default": "any",
+        "oneOf": [
+          { "title": "Any - only trigger occupancy when at least one watched device is connected", "enum": ["any"] },
+          { "title": "All - only trigger occupancy when all watched devices are connected", "enum": ["all"] },
+          { "title": "None - only trigger occupancy when none of the watched devices are connected", "enum": ["none"] }
+        ],
+        "required": true
+      },
       "watchGuests": {
         "title": "Watch Guest Networks?",
         "type": "boolean"
