@@ -86,7 +86,7 @@ class OccupancySensor {
             this.log(`${activeDevices.length} monitored device(s) found. Accessory is in mode "none" so NOT triggering occupancy.`)
             this.occupancyDetected = Characteristic.OccupancyDetected.OCCUPANCY_NOT_DETECTED
           } else {
-            this.log(`${activeDevices.length} monitored device(s) found. Accessory is in mode "none" so triggering occupancy."`)
+            this.log(`${activeDevices.length} monitored device(s) found. Accessory is in mode "none" so triggering occupancy.`)
             this.occupancyDetected = Characteristic.OccupancyDetected.OCCUPANCY_DETECTED
           }
         } else if (this.mode === 'all') {
@@ -102,7 +102,7 @@ class OccupancySensor {
             this.log(`${activeDevices.length} monitored device(s) found. Accessory is in mode "any" so triggering occupancy.`)
             this.occupancyDetected = Characteristic.OccupancyDetected.OCCUPANCY_DETECTED
           } else {
-            this.log(`${activeDevices.length} monitored device(s) found. Accessory is in mode "any" so NOT triggering occupancy."`)
+            this.log(`${activeDevices.length} monitored device(s) found. Accessory is in mode "any" so NOT triggering occupancy.`)
             this.occupancyDetected = Characteristic.OccupancyDetected.OCCUPANCY_NOT_DETECTED
           }
         }
