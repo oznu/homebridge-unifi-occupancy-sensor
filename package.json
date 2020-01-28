@@ -5,7 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "debug": "^3.2.6",
-    "unifi-events": "^0.4.2"
+    "unifi-events": "^0.4.3"
   },
   "keywords": [
     "homebridge-plugin"
