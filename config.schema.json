@@ -90,6 +90,12 @@
       "watchGuests": {
         "title": "Watch Guest Networks?",
         "type": "boolean"
+      },
+      "interval": {
+        "title": "Interval in seconds to query Unifi Controller",
+        "type": "integer",
+        "required": false,
+        "default": 1800
       }
     }
   }
