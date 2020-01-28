@@ -31,6 +31,7 @@ class OccupancySensor {
 
     this.watchGuests = config.watchGuests;
     this.mode = config.mode || 'any';
+    this.interval = config.interval || 1800;
 
     this.unifi = new UnifiEvents({
       controller: config.unifi.controller,
@@ -57,7 +58,7 @@ class OccupancySensor {
 
     this.occupancyDetected = Characteristic.OccupancyDetected.OCCUPANCY_NOT_DETECTED;
     this.checkOccupancy();
-    setInterval(this.checkOccupancy.bind(this), 1800 * 1000)
+    setInterval(this.checkOccupancy.bind(this), this.interval * 1000)
   }
 
   checkGuest(isGuest, mac) {
