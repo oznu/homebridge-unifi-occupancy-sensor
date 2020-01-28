@@ -45,9 +45,20 @@
         "title": "Watched Devices",
         "type": "array",
         "items": {
-          "title": "MAC Address",
-          "type": "string",
-          "pattern": "^([a-f0-9]{2}:){5}[a-f0-9]{2}$"
+          "title": "Device / AP",
+          "type": "object",
+          "properties": {
+            "device": {
+              "title": "Device MAC Address",
+              "type": "string",
+              "pattern": "^([a-f0-9]{2}:){5}[a-f0-9]{2}$"
+            },
+            "ap": {
+              "title": "AP MAC Address",
+              "type": "string",
+              "pattern": "^([a-f0-9]{2}:){5}[a-f0-9]{2}$"
+            }
+          }
         }
       },
       "mode": {
@@ -55,15 +66,36 @@
         "type": "string",
         "default": "any",
         "oneOf": [
-          { "title": "Any - only trigger occupancy when at least one watched device is connected", "enum": ["any"] },
-          { "title": "All - only trigger occupancy when all watched devices are connected", "enum": ["all"] },
-          { "title": "None - only trigger occupancy when none of the watched devices are connected", "enum": ["none"] }
+          {
+            "title": "Any - only trigger occupancy when at least one watched device is connected",
+            "enum": [
+              "any"
+            ]
+          },
+          {
+            "title": "All - only trigger occupancy when all watched devices are connected",
+            "enum": [
+              "all"
+            ]
+          },
+          {
+            "title": "None - only trigger occupancy when none of the watched devices are connected",
+            "enum": [
+              "none"
+            ]
+          }
         ],
         "required": true
       },
       "watchGuests": {
         "title": "Watch Guest Networks?",
         "type": "boolean"
+      },
+      "interval": {
+        "title": "Interval in seconds to query Unifi Controller",
+        "type": "integer",
+        "required": false,
+        "default": 1800
       }
     }
   }

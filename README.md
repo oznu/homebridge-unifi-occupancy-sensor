@@ -23,8 +23,12 @@ The plugin connects to the UniFi Controller event web socket to get instant noti
       "site": "default",                           // Optional. The UniFi site to connect to.
       "secure": false                              // Optional. Set true to validate the SSL certificate.
     },
-    "watch": ["44:00:10:f0:3e:66"]                 // Required. An array of device MAC addresses to watch for.
-    "watchGuests": true                            // Optional. Set false to not monitor guest networks.
+    "watch": [
+      "44:00:10:f0:3e:66", 
+      { "device": "44:00:10:f0:3e:67", "ap": "44:00:10:f0:3e:44" }
+    ],                                             // Required. An array of device MAC addresses to watch for or objects with device MAC / AP MAC
+    "watchGuests": true,                           // Optional. Set false to not monitor guest networks.
+    "interval": 1800,                              // Optional. Polling interval used to query Unifi in seconds 
     "mode": "any"                                  // Optional. Set to "any", "all" or "none".
   }
 ]
