@@ -1,23 +1,24 @@
 {
   "name": "homebridge-unifi-occupancy-sensor",
-  "version": "0.2.0",
+  "version": "1.0.0-test.2",
   "description": "An occupancy sensor for Homebridge and UniFi",
-  "main": "index.js",
-  "dependencies": {
-    "debug": "^3.2.6",
-    "unifi-events": "^0.4.3"
-  },
-  "keywords": [
-    "homebridge-plugin"
-  ],
-  "engines": {
-    "homebridge": ">=0.2.5"
-  },
+  "license": "GPL-3.0",
   "author": "oznu <dev@oz.nu>",
-  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git://github.com/oznu/homebridge-unifi-occupancy-sensor.git"
   },
-  "devDependencies": {}
+  "bugs": {
+    "url": "https://github.com/oznu/homebridge-unifi-occupancy-sensor/issues"
+  },
+  "main": "index.js",
+  "engines": {
+    "homebridge": ">=0.2.5"
+  },
+  "keywords": [
+    "homebridge-plugin"
+  ],
+  "dependencies": {
+    "unifi-events": "^0.4.3"
+  }
 }

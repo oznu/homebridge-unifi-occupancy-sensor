@@ -1,6 +1,5 @@
 'use strict';
 
-const debug = require('debug')('unifi');
 const UnifiEvents = require('unifi-events');
 const manifest = require('./package.json');
 
@@ -19,15 +18,17 @@ class OccupancySensor {
     this.name = config.name;
     this.occupancyService = new Service.OccupancySensor(this.name);
 
-    this._watch = config.watch || [];
-    // This allows for backwards compatibility with simple strings
-    this.watch = this._watch.map(function (watched) {
-      if (typeof watched === 'string' || watched instanceof String) {
-        return {"device": watched, "ap": undefined};
-      } else {
-        return watched;
+    this.watch = config.monitor || [];
+
+    if (config.watch) {
+      for (const watched of config.watch) {
+        if (typeof watched === 'string' || watched instanceof String) {
+          this.watch.push({ "device": watched, "ap": undefined });
+        } else {
+          this.watch.push(watched);
+        }
       }
-    });
+    }
 
     this.watchGuests = config.watchGuests;
     this.mode = config.mode || 'any';
@@ -47,12 +48,12 @@ class OccupancySensor {
     });
 
     this.unifi.on('connected', (data) => {
-      debug(`Device Connected Event Received from UniFi Controller: ${data.msg}`);
+      this.log.debug(`Device Connected Event Received from UniFi Controller: ${data.msg}`);
       return this.checkOccupancy()
     });
 
     this.unifi.on('disconnected', (data) => {
-      debug(`Device Disconnected Event Received from UniFi Controller: ${data.msg}`);
+      this.log.debug(`Device Disconnected Event Received from UniFi Controller: ${data.msg}`);
       return this.checkOccupancy()
     });
 
@@ -63,13 +64,13 @@ class OccupancySensor {
 
   checkGuest(isGuest, mac) {
     if (this.watchGuests && isGuest) {
-      debug(`Device [${mac}] is connected to a guest network and guest network monitoring is enabled.`);
+      this.log.debug(`Device [${mac}] is connected to a guest network and guest network monitoring is enabled.`);
       return true
     } else if (!this.watchGuests && isGuest) {
-      debug(`Device [${mac}] is connected to a guest network but guest network monitoring is NOT enabled.`);
+      this.log.debug(`Device [${mac}] is connected to a guest network but guest network monitoring is NOT enabled.`);
       return false
     } else {
-      debug(`Device [${mac}] is NOT connected to a guest network.`);
+      this.log.debug(`Device [${mac}] is NOT connected to a guest network.`);
       return true
     }
   }
@@ -81,23 +82,23 @@ class OccupancySensor {
   }
 
   checkOccupancy() {
-    debug('Getting list of connected clients from UniFi Controller...');
+    this.log.debug('Getting list of connected clients from UniFi Controller...');
 
     return this.unifi.getClients()
     .then((res) => {
-      debug(`${res.data.length} devices are currently connected to the UniFi network, checking each one to see if any are on the watch list...`);
+      this.log.debug(`${res.data.length} devices are currently connected to the UniFi network, checking each one to see if any are on the watch list...`);
       let activeDevices = res.data.filter((device) => {
-        debug(`Device [${device.mac}, ${device.ap_mac}] HOSTNAME: "${device.hostname}" , GUEST: "${device.is_guest}", SSID: "${device.essid}"`);
+        this.log.debug(`Device [${device.mac}, ${device.ap_mac}] HOSTNAME: "${device.hostname}" , GUEST: "${device.is_guest}", SSID: "${device.essid}"`);
         if (this.isInWatchlist(device) && this.checkGuest(device.is_guest, device.mac)) {
-          debug(`Device [${device.mac}, ${device.ap_mac}] Device is on the watch list. Going to trigger occupancy.`);
+          this.log.debug(`Device [${device.mac}, ${device.ap_mac}] Device is on the watch list. Going to trigger occupancy.`);
           return true
         } else {
-          debug(`Device [${device.mac}] Ignoring. Not on the watch list.`);
+          this.log.debug(`Device [${device.mac}] Ignoring. Not on the watch list.`);
           return false
         }
       });
 
-      debug(`Monitored devices found:`, activeDevices.map(x => x.mac));
+      this.log.debug(`Monitored devices found:`, activeDevices.map(x => x.mac));
 
       if (this.mode === 'none') {
         if (activeDevices.length > 0) {
