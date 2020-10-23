@@ -1,6 +1,9 @@
 'use strict';
 
-const UnifiEvents = require('unifi-events')
+const events = require('events');
+const Rx = require('rxjs');
+const RxOp = require('rxjs/operators');
+const UnifiEvents = require('unifi-events');
 const manifest = require('./package.json');
 const url = require('url');
 
@@ -57,6 +60,15 @@ class OccupancySensor {
       return this.checkOccupancy()
     });
 
+    this.emitter = new events.EventEmitter();
+    this.observable = Rx.fromEvent(this.emitter, 'data');
+    this.observable
+      .pipe(
+        RxOp.debounceTime(30000),
+        RxOp.distinctUntilChanged()
+      ).subscribe(value => {
+        this.setOccupancyDetected(value);
+      });
     this.occupancyDetected = Characteristic.OccupancyDetected.OCCUPANCY_NOT_DETECTED;
     this.checkOccupancy();
     setInterval(this.checkOccupancy.bind(this), this.interval * 1000)
@@ -126,7 +138,7 @@ class OccupancySensor {
         }
       }
 
-      this.setOccupancyDetected(this.occupancyDetected)
+      this.emitter.emit('data', this.occupancyDetected);
     })
     .catch((err) => {
       this.log(`ERROR: Failed to check occupancy: ${err.message}`)
@@ -138,6 +150,7 @@ class OccupancySensor {
   }
 
   setOccupancyDetected(value) {
+    this.log(`Setting OccupancyDetected to ${value}`);
     return this.occupancyService.setCharacteristic(Characteristic.OccupancyDetected, value)
   }
 
