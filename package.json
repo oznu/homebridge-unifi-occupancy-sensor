@@ -27,6 +27,8 @@
     }
   ],
   "dependencies": {
+    "rxjs": "^6.6.3",
+    "rxjs-compat": "^6.6.3",
     "unifi-events": "^2.0.0"
   }
 }
