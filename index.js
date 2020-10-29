@@ -64,7 +64,7 @@ class OccupancySensor {
     this.observable = Rx.fromEvent(this.emitter, 'data');
     this.observable
       .pipe(
-        RxOp.debounceTime(30000),
+        RxOp.debounceTime((config.debounceTime || 0) * 1000),
         RxOp.distinctUntilChanged()
       ).subscribe(value => {
         this.setOccupancyDetected(value);

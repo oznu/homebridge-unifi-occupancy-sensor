@@ -41,6 +41,7 @@ The easiest way to configure this plugin is via [Homebridge Config UI X](https:/
     ],
     "watchGuests": true,                           // Optional. Set false to not monitor guest networks.
     "interval": 1800,                              // Optional. Polling interval used to query Unifi in seconds 
+    "debounceTime": 10000,                         // Optional. Discard changes to occupancy that occur within the threshold in seconds
     "mode": "any"                                  // Optional. Set to "any", "all" or "none".
   }
 ]
