@@ -38,7 +38,7 @@ class OccupancySensor {
 
     this.unifi = new UnifiEvents({
       host: this.controller.hostname,
-      port: this.controller.port,
+      port: this.controller.port || 443,
       username: config.unifi.username,
       password: config.unifi.password,
       site: config.unifi.site || 'default',
