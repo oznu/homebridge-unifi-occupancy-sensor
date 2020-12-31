@@ -19,6 +19,6 @@
     "homebridge-plugin"
   ],
   "dependencies": {
-    "unifi-events": "^0.4.3"
+    "ubnt-unifi": "tickez/ubnt-unifi"
   }
 }

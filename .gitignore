@@ -3,3 +3,7 @@ yarn.lock
 package-lock.json.
 /homebridge-unifi-occupancy-sensor.iml
 /.idea/
+conf/
+/*.iml
+/*.tar.gz
+/*.tgz
