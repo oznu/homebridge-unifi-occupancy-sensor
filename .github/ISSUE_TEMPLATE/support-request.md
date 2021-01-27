@@ -24,7 +24,7 @@ Remove any sensative information.
 
 ```json
 Show your homebridge config.json here. 
-Remove any sensitive information, such as your UniFi username or password.
+Remove any sensitive information, such as your unifi username and password.
 ```
 
 **Screenshots:**

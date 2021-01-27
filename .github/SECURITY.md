@@ -1,7 +1,6 @@
 # Security Policies and Procedures
 
-This document outlines security procedures and general policies for the 
-`homebridge-unifi-occupancy-sensor` project.
+This document outlines security procedures and general policies for the `homebridge-unifi-occupancy-sensor` project.
 
   * [Reporting a Bug](#reporting-a-bug)
   * [Disclosure Policy](#disclosure-policy)
@@ -9,11 +8,10 @@ This document outlines security procedures and general policies for the
 
 ## Reporting a Bug
 
-The `homebridge-unifi-occupancy-sensor` team and community take all security 
-bugs in `homebridge-unifi-occupancy-sensor` seriously. Thank you for improving
-the security of `homebridge-unifi-occupancy-sensor`. We appreciate your efforts
-and responsible disclosure and will make every effort to acknowledge your 
-contributions.
+The `homebridge-unifi-occupancy-sensor` team and community take all security bugs in `homebridge-unifi-occupancy-sensor` 
+seriously. Thank you for improving the security of `homebridge-unifi-occupancy-sensor`. We appreciate
+your efforts and responsible disclosure and will make every effort to acknowledge 
+your contributions.
 
 Report security bugs by emailing the maintainer at dev@oz.nu
 
