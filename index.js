@@ -1,7 +1,8 @@
 'use strict';
 
-const UnifiEvents = require('unifi-events');
+const UnifiEvents = require('ubnt-unifi')
 const manifest = require('./package.json');
+const url = require('url');
 
 var Service, Characteristic;
 
@@ -33,26 +34,25 @@ class OccupancySensor {
     this.watchGuests = config.watchGuests;
     this.mode = config.mode || 'any';
     this.interval = config.interval || 1800;
+    this.controller = url.parse(config.unifi.controller);
 
     this.unifi = new UnifiEvents({
-      controller: config.unifi.controller,
+      host: this.controller.hostname,
+      port: this.controller.port || 443,
       username: config.unifi.username,
       password: config.unifi.password,
       site: config.unifi.site || 'default',
-      rejectUnauthorized: config.unifi.secure || false,
+      insecure: !config.unifi.secure || true,
+      unifios: config.unifi.unifios || false,
       listen: true
     });
 
-    this.unifi.on('websocket-status', (socketLog) => {
-      this.log(socketLog)
-    });
-
-    this.unifi.on('connected', (data) => {
+    this.unifi.on('*.connected', (data) => {
       this.log.debug(`Device Connected Event Received from UniFi Controller: ${data.msg}`);
       return this.checkOccupancy()
     });
 
-    this.unifi.on('disconnected', (data) => {
+    this.unifi.on('*.disconnected', (data) => {
       this.log.debug(`Device Disconnected Event Received from UniFi Controller: ${data.msg}`);
       return this.checkOccupancy()
     });
@@ -84,7 +84,7 @@ class OccupancySensor {
   checkOccupancy() {
     this.log.debug('Getting list of connected clients from UniFi Controller...');
 
-    return this.unifi.getClients()
+    return this.unifi.get('stat/sta')
     .then((res) => {
       this.log.debug(`${res.data.length} devices are currently connected to the UniFi network, checking each one to see if any are on the watch list...`);
       let activeDevices = res.data.filter((device) => {

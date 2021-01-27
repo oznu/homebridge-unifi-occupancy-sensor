@@ -25,14 +25,16 @@ The easiest way to configure this plugin is via [Homebridge Config UI X](https:/
     "accessory": "UniFi Occupancy Sensor",
     "name": "Occupancy Sensor",                    // Required. The name of the sensor.
     "unifi": {
-      "controller": "https://demo.ubnt.com:8443",  // Required. The url of the UniFi Controller.
+      "controller": "https://demo.ubnt.com:8443",  // Required. The url of the UniFi Controller. Use port 443 for UnifiOS
       "username": "superadmin",                    // Required. A read-only user is fine.
       "password": "password",                      // Required.
       "site": "default",                           // Optional. The UniFi site to connect to.
-      "secure": false                              // Optional. Set true to validate the SSL certificate.
+      "secure": false,                             // Optional. Set true to validate the SSL certificate.
+      "unifios": false                             // Optional. Set true if your controller runs on UnifiOS. Use port 443 as well.
     },
     "watch": [                                     // Optional - use either watch or monitor.
-      "44:00:10:f0:3e:66",                         // An array of device MAC addresses to watch for.
+      "44:00:10:f0:3e:66"
+    ],                                             // An array of device MAC addresses to watch for.
     "monitor": [
       {                                            // Optional - use either watch or monitor. 
         "device": "44:00:10:f0:3e:67",             // An array of device MAC/AP combinations to watch for.

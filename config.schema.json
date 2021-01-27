@@ -39,6 +39,10 @@
           "secure": {
             "title": "Validate the Controller SSL Certificate?",
             "type": "boolean"
+          },
+          "unifios": {
+            "title": "Does your controller run on UnifiOS?",
+            "type": "boolean"
           }
         }
       },
