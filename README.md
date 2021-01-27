@@ -1,10 +1,16 @@
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/3979615/62948461-bae3bd00-be27-11e9-81b5-05c65c388a1e.png" height="120"><br>
+    <img src="https://raw.githubusercontent.com/homebridge/branding/master/logos/homebridge-color-round-stylized.png" height="140"><br>
 </p>
+
+<span align="center">
 
 # Homebridge UniFi Occupancy Sensor
 
-[![npm](https://img.shields.io/npm/v/homebridge-unifi-occupancy-sensor.svg)](https://www.npmjs.com/package/homebridge-unifi-occupancy-sensor) [![npm](https://img.shields.io/npm/dt/homebridge-unifi-occupancy-sensor.svg)](https://www.npmjs.com/package/homebridge-unifi-occupancy-sensor) [![Donate](https://img.shields.io/badge/donate-paypal-yellowgreen.svg)](https://paypal.me/oznu)
+[![npm](https://img.shields.io/npm/v/homebridge-unifi-occupancy-sensor.svg)](https://www.npmjs.com/package/homebridge-unifi-occupancy-sensor)
+[![npm](https://img.shields.io/npm/dt/homebridge-unifi-occupancy-sensor.svg)](https://www.npmjs.com/package/homebridge-unifi-occupancy-sensor)
+[![Donate](https://img.shields.io/badge/donate-paypal-yellowgreen.svg)](https://paypal.me/oznu)
+
+</span>
 
 This Homebridge plugin will provide an occupancy sensor accessory to HomeKit based on the devices connected to WiFi access points managed by a [UniFi Controller](https://www.ubnt.com/download/unifi).
 
@@ -60,7 +66,7 @@ In this case the site name is `mofkpypu` and this is the value that should be en
 
 ## License
 
-Copyright (C) 2017-2020 oznu
+Copyright (C) 2017-2021 oznu
 
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 
