@@ -1,6 +1,6 @@
 {
   "name": "homebridge-unifi-occupancy-sensor",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "An occupancy sensor for Homebridge and UniFi",
   "license": "GPL-3.0",
   "author": "oznu <dev@oz.nu>",

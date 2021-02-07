@@ -137,6 +137,7 @@
         }
       ]
     },
+    "unifi.unifios",
     "unifi.secure",
     "watchGuests",
     "unifi.site",
